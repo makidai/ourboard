@@ -284,7 +284,7 @@ export type CursorPositions = { action: typeof CURSOR_POSITIONS_ACTION_TYPE; p: 
 
 export const exampleBoard: Board = {
     id: "default",
-    name: "Test Board",
+    name: "無題のボード",
     items: arrayToObject("id", [
         newNote("Hello", PINK, 10, 5),
         newNote("World", LIGHT_BLUE, 20, 10),

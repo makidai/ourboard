@@ -25,12 +25,9 @@ export const DashboardView = ({
         <div id="root" className="dashboard">
             <div className="content">
                 <header>
-                    <h1 id="app-title" data-test="app-title">
-                        OurBoard
-                    </h1>
-                    <p>
-                        Free and <a href="https://github.com/raimohanska/r-board">open-source</a> online whiteboard.
-                    </p>
+                    <h2 id="app-title" data-test="app-title">
+                        全てのボード
+                    </h2>
                 </header>
                 <main>
                     <CreateBoard {...{ dispatch, sessionState }} />
@@ -127,7 +124,7 @@ const RecentBoardsView = ({ recentBoards, dispatch }: { recentBoards: RecentBoar
                         <Welcome />
                     ) : (
                         <div className="recent-boards">
-                            <h2>Your recent boards</h2>
+                            <h3>最近使用したボード</h3>
                             {L.view(lotsOfBoards, (show) =>
                                 show ? (
                                     <div className="search">
@@ -150,14 +147,13 @@ const RecentBoardsView = ({ recentBoards, dispatch }: { recentBoards: RecentBoar
                                                 {b.name}
                                             </Link>
                                             <a className="remove" onClick={() => recentBoards.removeRecentBoard(b)}>
-                                                remove
+                                                削除
                                             </a>
                                         </li>
                                     )}
                                 />
                                 {L.view(matchingBoards, filter, (bs, f) => {
                                     function createBoard() {
-                                        console.log("asdf")
                                         const newBoard: BoardStub = { name: f, id: uuid.v4() }
                                         dispatch({ action: "board.add", payload: newBoard })
                                         setTimeout(
@@ -250,9 +246,8 @@ const GoogleLoginArea = ({ sessionState }: { sessionState: L.Property<UserSessio
 const Welcome = () => {
     return (
         <div>
-            <h2>Welcome to OurBoard!</h2>
             <p>
-                Please try the <a href={`/b/${exampleBoard.id}`}>Example Board</a>, or create a new board below.
+                <a href={`/b/${exampleBoard.id}`}>サンプル</a>
             </p>
         </div>
     )
@@ -329,11 +324,11 @@ const CreateBoard = ({
 
     return (
         <form onSubmit={createBoard} className="create-board">
-            <h2>Create a board</h2>
+            <h3>新しいボードを作る</h3>
             <div className="input-and-button">
-                <TextInput value={boardName} placeholder="Enter board name" />
+                <TextInput value={boardName} placeholder="無題のボード" />
                 <button id="create-board-button" data-test="create-board-submit" type="submit" disabled={disabled}>
-                    Create
+                    作成
                 </button>
             </div>
             {L.view(
